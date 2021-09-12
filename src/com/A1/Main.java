@@ -1,7 +1,5 @@
 package com.A1;
 
-import java.io.IOException;
-
 public class Main {
 
     public static void main(String[] argv) {
@@ -90,7 +88,7 @@ public class Main {
             } else {
                 pi = pi - 1 / cnt;
             }
-            signal = signal ? false : true;
+            signal = !signal;
         }
         pi = (float) 4 * (1-pi);
         System.out.println("O valor de pi, através da lei de Leibniz é "+pi);
