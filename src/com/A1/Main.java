@@ -1,5 +1,7 @@
 package com.A1;
 
+import java.io.IOException;
+
 public class Main {
 
     public static void main(String[] argv) {
@@ -8,7 +10,7 @@ public class Main {
         //fibonacci();
         //primes();
         //ASCII();
-        PI();
+        //PI();
     }
 
     private static void fibonacci() {
@@ -71,7 +73,26 @@ public class Main {
         }
     }
 
-    private static void PI(){
-         
+    private static void PI() {
+        /*
+           Através da observação de Leibniz, a fórmula de formação
+           do pi foi definida, sendo encontrado quando multiplicamos 4 por 1 menos
+           a quantidade enésima de 1/n, sendo n ≥ 3 e sempre ímpar, ou seja,
+           aumentando na proporção de n+2, infinitamente. Lembrando que o
+           sinal também é trocado a cada nova iteração, iniciando com positivo.
+        * */
+        boolean signal = true;
+        float pi = 0;
+        //permitir o usuário escolher a qtd de iterações
+        for(float cnt = 3; cnt < 1_000_000; cnt += 2) {
+            if(signal) {
+                pi = pi + 1 / cnt;
+            } else {
+                pi = pi - 1 / cnt;
+            }
+            signal = signal ? false : true;
+        }
+        pi = (float) 4 * (1-pi);
+        System.out.println("O valor de pi, através da lei de Leibniz é "+pi);
     }
 }
