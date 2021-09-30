@@ -1,5 +1,8 @@
 package com.A1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] argv) {
@@ -9,6 +12,7 @@ public class Main {
         //primes();
         //ASCII();
         //PI();
+        perfect();
     }
 
     private static void fibonacci() {
@@ -30,14 +34,15 @@ public class Main {
     }
 
     private static void primes() {
-        int x, count = 1;
-        boolean prime = false;
-        System.out.println("Os números primos entre 1 e 100 são (2 e 3 não listados):");
-        for (int i = 0; i < 100; i++) {
+        int x, cnt = 0;
+        System.out.println("Os números primos entre 1 e 100 são:");
+        for (int i = 2; i < 100; i++) {
             /* O maior número que pode ser multiplicado
-                para se encontrar um valor é a sua raiz,
-                pois será o máximo multiplicável até se
-                repetirem valores
+                por outro para se encontrar um valor é a
+                sua raiz, pois será o máximo multiplicá-
+                vel até se repetirem valores novamente na
+                ordem inversa.
+
                 ex: múltiplos de 9
 
                     1x9
@@ -45,21 +50,20 @@ public class Main {
                     9x1
 
                 Então, entende-se que após determinado valor, as múl-
-                tiplicações se repetem, e esse valor é a raiz quadrada
-                do número.
+                tiplicações se repetem. Se um número, dividido pelos
+                valores que se sucedem a cada um até a sua raiz, re-
+                tornar um mod == 0 para uma divisão, então esse núme-
+                ro não é primo.
               */
-            for (x = 2; x <= Math.sqrt(i); x++) { // Se for divisível por outro valor menor que a raiz, então não é primo
-                if (i % x == 0) {
-                    prime = false;
-                    break;
+            for (x = 1; x <= i; x++) {
+                if(i % x == 0) {
+                    cnt++;
                 }
-                prime = true;
             }
-            if (prime) {
-                System.out.println("Primo "+count+" - "+i);
-                count++;
+            if(cnt == 2) {
+                System.out.println(i+" é primo.");
             }
-
+            cnt = 0;
         }
     }
 
@@ -91,6 +95,32 @@ public class Main {
             signal = !signal;
         }
         pi = (float) 4 * (1-pi);
-        System.out.println("O valor de pi, através da lei de Leibniz é "+pi);
+        System.out.println("O valor de pi, através da lei de Leibniz com 1.000.000 iterações é "+pi);
+    }
+
+    private static void perfect(){
+        // Um número perfeito é aquele que é a soma de todos os seus
+        // divisores inteiros, sem contar com ele mesmo. A fórmula
+        // usando os números primos de Mersenne é:
+        // (2^p-1) * ((2^p)-1), sendo p um primo.
+
+        int i = 0, cnt = 0;
+        boolean prime = false;
+        List<Double> list = new ArrayList<>();
+
+        while(list.size() < 4) {
+            i++;
+            for (int x = 1; x <= i; x++) {
+                if(i % x == 0) {
+                    cnt++;
+                }
+            }
+
+            if(cnt == 2) {
+                list.add(Math.pow(2, i - 1) * (Math.pow(2, i) - 1));
+            }
+            cnt = 0;
+        }
+    System.out.println("Os primeiros 4 números perfeitos são: "+list);
     }
 }
