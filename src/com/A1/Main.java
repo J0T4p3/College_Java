@@ -8,14 +8,15 @@ public class Main {
     public static void main(String[] argv) {
 
         //System.out.println("Questão 1: Imprima os 15 primeiros dígitos de fibonacci");
-        //fibonacci();
+        //Fibonacci();
         //primes();
         //ASCII();
         //PI();
-        perfect();
+        //Perfect();
+        StrCounter();
     }
 
-    private static void fibonacci() {
+    private static void Fibonacci() {
         int x;
         int [] fibo = new int[15];
 
@@ -33,7 +34,7 @@ public class Main {
         }
     }
 
-    private static void primes() {
+    private static void Primes() {
         int x, cnt = 0;
         System.out.println("Os números primos entre 1 e 100 são:");
         for (int i = 2; i < 100; i++) {
@@ -98,7 +99,7 @@ public class Main {
         System.out.println("O valor de pi, através da lei de Leibniz com 1.000.000 iterações é "+pi);
     }
 
-    private static void perfect(){
+    private static void Perfect(){
         // Um número perfeito é aquele que é a soma de todos os seus
         // divisores inteiros, sem contar com ele mesmo. A fórmula
         // usando os números primos de Mersenne é:
@@ -122,5 +123,23 @@ public class Main {
             cnt = 0;
         }
     System.out.println("Os primeiros 4 números perfeitos são: "+list);
+    }
+
+    private static void StrCounter() {
+        String texto = """
+                Os nomes das classes em Java precisam começar com uma letra e
+                depois desta quaisquer combinações de letras e dígitos. Como padrão,
+                os nomes são substantivos que iniciam com uma letra maiúscula. Para
+                as constantes é costume utilizar sempre letras maiúsculas nos nomes""";
+        String[] trechos = texto.split("");
+        int counter = 0;
+        char Achar = 'a', compChar;
+        for (String trecho : trechos) {
+            compChar = trecho.charAt(0);
+            if (compChar == Achar) {
+                counter += 1;
+            }
+        }
+        System.out.println("No texto acima ocorrem "+counter+" vezes a letra 'a'.");
     }
 }
